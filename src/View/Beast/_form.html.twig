@@ -1,0 +1,45 @@
+<form method="post">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="title">Name :</label>
+            <input type="text" class="form-control" name="name" value="{% if beast.name is defined %} {{ beast.name }} {% endif %}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="area">Area :</label>
+            <input type="text" class="form-control" name="area" value="{% if beast.area is defined %} {{ beast.area }} {% endif %}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="area">Picture :</label>
+            <input type="url" class="form-control" name="picture" id="picture" value="{% if beast.picture is defined %} {{ beast.picture }} {% endif %}"/>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="size">Size (in meter):</label>
+            <input type="text" class="form-control" name="size" id="size" value="{% if beast.size is defined %} {{ beast.size }} {% endif %}"/>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="planet">Planet :</label>
+            <select name="planet" class="custom-select" id="planet">
+                {% for planet in planets %}
+                    <option value="{{ planet.id }}">{{ planet.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="movies">Movie :</label>
+            <select name="movies" class="custom-select" id="movies" multiple>
+                {% for movie in movies %}
+                    <option value="{{ movie.id }}">{{ movie.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-12">
+            <input type="submit" value="Valider" name="submit" class="float-right">
+        </div>
+    </div>
+</form>

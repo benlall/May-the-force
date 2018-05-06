@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-12">All Movies</h1>
+    </div>
+
+    <div class="row">
+        <ul class="list">
+            {% for movie in movies %}
+                <li>{{ movie.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <nav class="row">
+        <a href="/planets">Check the planets</a><br>
+        <a href="/beasts">Check the beasts</a><br>
+    </nav>
+{% endblock %}

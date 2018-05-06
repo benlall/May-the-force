@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="col-12">All Planets</h1>
+    </div>
+    <div class="row">
+        <ul class="list">
+            {% for planet in planets %}
+                <li>{{ planet.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <nav class="row">
+        <a href="/movies">Check the movies</a>
+        <a href="/beasts">Check the beasts</a><br>
+    </nav>
+{% endblock %}
