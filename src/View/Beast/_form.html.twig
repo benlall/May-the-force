@@ -23,18 +23,28 @@
         <div class="form-group col-md-6">
             <label for="planet">Planet :</label>
             <select name="planet" class="custom-select" id="planet">
-                    <option value="">{% if beast.planetName is defined %}{{ beast.planetName }} {% endif %}</option>
                 {% for planet in planets %}
-                    <option value="{{ planet.id }}">{{ planet.name }}</option>
+                    {% if beast is defined %}
+                        {% if beast.idPlanet == planet.id %}
+                            <option value="{{ planet.id }}" selected>{{ planet.name }}</option>
+                        {% endif %}
+                    {% else %}
+                        <option value="{{ planet.id }}">{{ planet.name }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
         <div class="form-group col-md-6">
             <label for="movies">Movie :</label>
             <select name="movies" class="custom-select" id="movies" multiple>
-                    <option value="">{% if beast.title is defined %}{{ beast.title }} {% endif %}</option>
                 {% for movie in movies %}
-                    <option value="{{ movie.id }}">{{ movie.title }}</option>
+                    {% if beast is defined %}
+                        {% if beast.idMovie == movie.id %}
+                            <option value="{{ movie.id }}" selected>{{ movie.title }}</option>
+                        {% endif %}
+                    {% else %}
+                        <option value="{{ movie.id }}">{{ movie.title }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>

@@ -25,7 +25,7 @@ class BeastManager extends AbstractManager
     public function selectOneById(int $id)
     {
         // prepared request
-        $statement = $this->pdoConnection->prepare("SELECT beast.name, beast.picture, beast.size, beast.area, planet.name as planetName, movie.title FROM planet JOIN `$this->table` ON  beast.id_planet = planet.id JOIN movie ON movie.id = beast.id_movie WHERE beast.id=:id");
+        $statement = $this->pdoConnection->prepare("SELECT beast.name, beast.picture, beast.size, beast.area, planet.name as planetName, beast.id_planet, beast.id_movie, movie.title FROM planet JOIN `$this->table` ON  beast.id_planet = planet.id JOIN movie ON movie.id = beast.id_movie WHERE beast.id=:id");
         $statement->setFetchMode(\PDO::FETCH_CLASS, $this->className);
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();

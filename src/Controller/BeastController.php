@@ -170,7 +170,6 @@ class BeastController extends AbstractController
             die;
         }
 
-        // delete POST
         if (isset($_POST['delete'])) {
             if (isset($_POST['id'])) {
                 $id = $_POST['id'];
