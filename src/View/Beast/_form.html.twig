@@ -3,26 +3,39 @@
         <div class="form-group col-md-6">
             <label for="title">Name :</label>
             <input type="text" class="form-control" name="name" value="{% if beast.name is defined %} {{ beast.name }} {% endif %}">
+            {% if errors is not null %}
+                <div>{{ errors}}</div>
+            {% endif %}
         </div>
         <div class="form-group col-md-6">
             <label for="area">Area :</label>
             <input type="text" class="form-control" name="area" value="{% if beast.area is defined %} {{ beast.area }} {% endif %}">
+            {% if errors is not null%}
+                <div>{{ errors }}</div>
+            {% endif %}
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="area">Picture :</label>
             <input type="url" class="form-control" name="picture" id="picture" value="{% if beast.picture is defined %} {{ beast.picture }} {% endif %}"/>
+            {% if errors is not null%}
+                <div>{{ errors }}</div>
+            {% endif %}
         </div>
         <div class="form-group col-md-6">
             <label for="size">Size (in meter):</label>
             <input type="text" class="form-control" name="size" id="size" value="{% if beast.size is defined %} {{ beast.size }} {% endif %}"/>
+            {% if errors is not null%}
+                <div>{{ errors }}</div>
+            {% endif %}
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="planet">Planet :</label>
             <select name="planet" class="custom-select" id="planet">
+                <option value="">Please, select your planet</option>
                 {% for planet in planets %}
                     {% if beast is defined %}
                         {% if beast.idPlanet == planet.id %}
@@ -32,11 +45,15 @@
                         <option value="{{ planet.id }}">{{ planet.name }}</option>
                     {% endif %}
                 {% endfor %}
+                {% if errors is not null%}
+                    <div>{{ errors }}</div>
+                {% endif %}
             </select>
         </div>
         <div class="form-group col-md-6">
             <label for="movies">Movie :</label>
-            <select name="movies" class="custom-select" id="movies" multiple>
+            <select name="movies" class="custom-select" id="movies">
+                <option value="">Please, select your favorite movie</option>
                 {% for movie in movies %}
                     {% if beast is defined %}
                         {% if beast.idMovie == movie.id %}
@@ -44,6 +61,9 @@
                         {% endif %}
                     {% else %}
                         <option value="{{ movie.id }}">{{ movie.title }}</option>
+                    {% endif %}
+                    {% if errors is not null%}
+                        <div>{{ errors }}</div>
                     {% endif %}
                 {% endfor %}
             </select>

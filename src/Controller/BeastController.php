@@ -73,15 +73,19 @@ class BeastController extends AbstractController
         $movieManager = new MovieManager(); //to list all movies in form
         $movies = $movieManager->selectAll();
 
-        $errors['name'] = null;
-        $errors['picture'] = null;
-        $errors['size'] = null;
-        $errors['area'] = null;
-        $errors['planet'] = null;
-        $errors['movie'] = null;
-        $errorMessage = 'Merci de renseigner ce champ';
+        $errors[] = null;
+        $errorMessage = null;
+        $name = null;
+        $area = null;
+        $size = null;
+        $picture = null;
+        $planet = null;
+        $movie = null;
 
         if ($_POST) {
+
+            $errorMessage = 'Merci de renseigner ce champ';
+
             if (!empty($_POST['name'])) {
                 $name = $_POST['name'];
             } else {
@@ -93,7 +97,7 @@ class BeastController extends AbstractController
                 $errors['picture'] = $errorMessage;;
             }
             if (!empty($_POST['size'])) {
-                $size = $_POST['size'];
+                $size = (int) $_POST['size'];
             } else {
                 $errors['size'] = $errorMessage;;
             }
@@ -110,7 +114,7 @@ class BeastController extends AbstractController
             if (!empty($_POST['movies'])) {
                 $movie = (int)$_POST['movies'];
             } else {
-                $errors['movie'] = $errorMessage;;
+                $errors['movies'] = $errorMessage;;
             }
 
             if (!is_null($errors)) {
@@ -127,12 +131,20 @@ class BeastController extends AbstractController
                 $_SESSION['message'] = 'Insersion OK';
                 header('Location: /beasts');
                 die;
+            } else {
+                $templateVariables = [
+                    'planets' => $planets,
+                    'movies' => $movies,
+                    'errors' => $errorMessage];
+
+                return $this->twig->render('Beast/add.html.twig', $templateVariables);
             }
         }
 
         $templateVariables = [
             'planets' => $planets,
-            'movies' => $movies];
+            'movies' => $movies,
+            'errors' => $errorMessage];
 
         return $this->twig->render('Beast/add.html.twig', $templateVariables);
     }
@@ -181,7 +193,8 @@ class BeastController extends AbstractController
         $templateVariables = ['beast' => $beast,
             'movies' => $movies,
             'planets' => $planets,
-            'id' => $id];
+            'id' => $id,
+            'errors' => $errorMessage];
 
         return $this->twig->render('Beast/edit.html.twig', $templateVariables);
     }
